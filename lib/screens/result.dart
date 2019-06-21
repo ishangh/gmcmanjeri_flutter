@@ -176,18 +176,6 @@ class _ResultContentState extends State<ResultContent>
           percentage = lerpDouble(
               percentage, newPercentage, percentageAnimationController.value);
 
-          /*
-          if(percentage <= 10)
-            fillColor = Colors.green;
-          else if(percentage<=20)
-            fillColor = Colors.amberAccent;
-          else if(percentage<=30)
-            fillColor = Colors.amber;
-          else if(percentage <= 40)
-            fillColor = Colors.redAccent;
-          else if(percentage>40)
-            fillColor = Colors.red;
-*/
         });
       });
 
@@ -215,36 +203,71 @@ class _ResultContentState extends State<ResultContent>
         title: Text("Result"),
       ),
       body: Center(
-        child: Container(
-          height: 200.0,
-          width: 200.0,
-          child: CustomPaint(
-            foregroundPainter: ProgressBar(
-                completeColor: fillColor,
-                lineColor: Colors.blueGrey,
-                completePercent: percentage,
-                width: width),
-            child: Center(
-                child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    displayText,
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                ),
-                Text(
-                  displaySubText,
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(
-                        top: 10.0, bottom: 25.0, left: 15.0, right: 15.0),
-                    child: Builder(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              height: 200.0,
+              width: 200.0,
+              child: CustomPaint(
+                foregroundPainter: ProgressBar(
+                    completeColor: fillColor,
+                    lineColor: Colors.blueGrey,
+                    completePercent: percentage,
+                    width: width),
+                child: Center(
+                    child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        displayText,
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                    ),
+                    Text(
+                      displaySubText,
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                )),
+              ),
+            ),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: 10.0, bottom: 25.0, left: 15.0, right: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Builder(
+                          builder: (context) => RaisedButton(
+                              child: Text(
+                                "Save",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white,
+                                    fontSize: 25.0),
+                              ),
+                              elevation: 2.0,
+                              color: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              onPressed: () {
+                                debugPrint("Save clicked");
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                                Navigator.of(context).pushNamed("/");
+                              })),
+                    ),
+                    Builder(
                         builder: (context) => RaisedButton(
                             child: Text(
-                              "Continue",
+                              "Delete",
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
@@ -255,18 +278,18 @@ class _ResultContentState extends State<ResultContent>
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             onPressed: () {
-                              debugPrint("Proceed clicked");
+                              debugPrint("Delete clicked");
                               Navigator.pop(context);
                               Navigator.pop(context);
                               Navigator.pop(context);
                               Navigator.of(context).pushNamed("/");
-                            }))),
-              ],
-              mainAxisAlignment: MainAxisAlignment.center,
-            )),
-          ),
+                            })),
+                  ],
+                )),
+          ],
         ),
       ),
+
     );
   }
 }
