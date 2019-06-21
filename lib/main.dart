@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:gmcmanjeri_flutter/views/mainform.dart';
-void main(){
-  runApp(MyApp());
-}
+import 'package:gmcmanjeri_flutter/screens/edit_surveys.dart';
+import 'package:gmcmanjeri_flutter/screens/export.dart';
+import 'package:gmcmanjeri_flutter/screens/home.dart';
+import 'package:gmcmanjeri_flutter/screens/statistics.dart';
 
-class MyApp extends StatelessWidget{
+void main() => runApp(new GMCManjeri());
+
+class GMCManjeri extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
-      title: "GMC Manjeri Survey",
-      debugShowCheckedModeBanner: false,
-      color: Colors.white,
-      theme: ThemeData(
-          primaryColor: Colors.black,
-          appBarTheme: AppBarTheme(
-              iconTheme: IconThemeData(color: Colors.black)
-          ),
-          inputDecorationTheme: InputDecorationTheme(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-              )
-          ),
-          iconTheme: IconThemeData(color: Colors.black)
-      ),
-      home: MainForm(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: "GMC Manjeri",
+        color: Colors.white,
+        theme: ThemeData(
+            primaryColor: Colors.black,
+            appBarTheme:
+                AppBarTheme(iconTheme: IconThemeData(color: Colors.white)),
+            inputDecorationTheme: InputDecorationTheme(
+                border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            )),
+            iconTheme: IconThemeData(color: Colors.black)),
+        home: new HomeScreen(),
+        routes: <String, WidgetBuilder>{
+          EditSurvey.routeName: (BuildContext context) => new EditSurvey(),
+          Export.routeName: (BuildContext context) => new Export(),
+          Statistics.routeName: (BuildContext context) => new Statistics(),
+        });
   }
 }

@@ -1,44 +1,19 @@
-class Person{
-  int _id = 0;
-  String _name = "";
-  String _address = "";
-  String _religion = "";
-  String _occupation = "";
-  String _education = "";
+class Person
+{
+  int id = 0;
+  String name = "";
+  String address = "";
+  int phoneno = 0;
+  String religion = "";
+  String occupation = "";
+  String education = "";
+  bool diabetes = false;
+  int gender = 0;
+  bool smoker = false;
+  int age = 0;
+  int sbp = 0;
+  int cholestrol = 0;
+  String color = 'green';
 
-  Person(int id, String name, String address, String religion, String occupation, String education){
-    this._id = id;
-    this._name = name;
-    this._address = address;
-    this._religion = religion;
-    this._occupation = occupation;
-    this._education = education;
-  }
-
-  int get id => _id;
-  String get name => _name;
-  String get address => _address;
-  String get religion => _religion;
-  String get occupation => _occupation;
-  String get education => _education;
-
-  set name(String newName){
-    this._name = newName;
-  }
-
-  set address(String newAddress){
-    this._address = newAddress;
-  }
-
-  set religion(String newReligion){
-    this._religion = newReligion;
-  }
-
-  set occupation(String newOccupation){
-    this._occupation = newOccupation;
-  }
-
-  set education(String newEducation){
-    this._education = newEducation;
-  }
+  Person(this.id, this.name, this.address, this.phoneno, this.religion, this.occupation, this.education);
 }
