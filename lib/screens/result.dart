@@ -3,14 +3,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-
 // For deciding the type of Result to be displayed, change the value passed into the ResultContent Widget, in the layout of HOME section
 
 // For adding new properties to the type of Results use RESULT CLASS
 
 // Add new type of Results in the MAIN FUNCTION or changing existing properties
-
-
 
 //*****************************RESULT CLASS*******************************
 class Result {
@@ -24,22 +21,14 @@ class Result {
 }
 //***************************************************************************
 
-
-
 var resultsList = new List<Result>();
-
 
 // Change the value of this variable to change the width of the progress bar
 double width = 10.0;
 
-
-
-
-
 //*******************MAIN FUNCTION*****************************************
 
 void main() {
-
   //THIS IS WHERE YOU CAN ADD CATEGORIES OR CHANGE THEIR PROPERTIES
 
   resultsList.add(new Result(20.0, Colors.green, "LOW RISK", "(<10%)"));
@@ -53,10 +42,6 @@ void main() {
 }
 //***************************************************************************
 
-
-
-
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -66,10 +51,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Colors.black,
           appBarTheme:
-          AppBarTheme(iconTheme: IconThemeData(color: Colors.black)),
+              AppBarTheme(iconTheme: IconThemeData(color: Colors.black)),
           inputDecorationTheme: InputDecorationTheme(
               border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
           iconTheme: IconThemeData(color: Colors.black)),
       home: Home(),
       debugShowCheckedModeBanner: false,
@@ -77,12 +62,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 //*********************************** HOME ******************************************
 
-
 class Home extends StatelessWidget {
-
   //BASIC LAYOUT
   // Scaffold
   //      Home Content
@@ -106,7 +88,6 @@ class Home extends StatelessWidget {
       // 4 - CRITICAL RISK
 
       //********************************************************************
-
 
       floatingActionButton: Row(
         children: <Widget>[
@@ -137,24 +118,20 @@ class Home extends StatelessWidget {
 
 //**********************************************************************************
 
-
-
 //*************************************RESULT CONTENT******************************************
 
 class ResultContent extends StatefulWidget {
-
-
   int choice;
 
-  ResultContent(var choice)
-  {
+  ResultContent(var choice) {
     this.choice = choice;
     resultsList.add(new Result(20.0, Colors.green, "LOW RISK", "(<10%)"));
-  resultsList.add(
-      new Result(40.0, Colors.amberAccent, "LOW MEDIUM RISK", "(10%-20%)"));
-  resultsList.add(new Result(60.0, Colors.amber, "MEDIUM RISK", "(20%-30)"));
-  resultsList.add(new Result(80.0, Colors.redAccent, "HIGH RISK", "(30%-40%)"));
-  resultsList.add(new Result(100.0, Colors.red, "CRITICAL RISK", "(>40%)"));
+    resultsList.add(
+        new Result(40.0, Colors.amberAccent, "LOW MEDIUM RISK", "(10%-20%)"));
+    resultsList.add(new Result(60.0, Colors.amber, "MEDIUM RISK", "(20%-30)"));
+    resultsList
+        .add(new Result(80.0, Colors.redAccent, "HIGH RISK", "(30%-40%)"));
+    resultsList.add(new Result(100.0, Colors.red, "CRITICAL RISK", "(>40%)"));
   }
 
   @override
@@ -169,9 +146,8 @@ class _ResultContentState extends State<ResultContent>
   double newPercentage = 0.0;
   double percentage = 0.0;
   int choice;
-  String displayText ;
-  String displaySubText ;
-
+  String displayText;
+  String displaySubText;
 
   Color fillColor;
   AnimationController percentageAnimationController;
@@ -189,8 +165,6 @@ class _ResultContentState extends State<ResultContent>
       fillColor = resultsList[choice].fillColor;
       displayText = resultsList[choice].displayText;
       displaySubText = resultsList[choice].displaySubText;
-
-
     });
 
     // For the Animation of the progress bar filling
@@ -201,7 +175,6 @@ class _ResultContentState extends State<ResultContent>
         setState(() {
           percentage = lerpDouble(
               percentage, newPercentage, percentageAnimationController.value);
-
 
           /*
           if(percentage <= 10)
@@ -215,27 +188,25 @@ class _ResultContentState extends State<ResultContent>
           else if(percentage>40)
             fillColor = Colors.red;
 */
-
-
         });
       });
 
     startAnimation();
   }
 
-
   // Function to kick off the animation
   void startAnimation() {
-
     setState(() {
       newPercentage = tempPercentage;
       percentageAnimationController.forward(from: -1.0);
     });
   }
 
-
-
-  // Contains the ProgressBar and the text inside
+  @override
+  void dispose() {
+    percentageAnimationController.dispose();
+    super.dispose();
+  } // Contains the ProgressBar and the text inside
 
   @override
   Widget build(BuildContext context) {
@@ -244,66 +215,63 @@ class _ResultContentState extends State<ResultContent>
         title: Text("Result"),
       ),
       body: Center(
-      child: Container(
-        height: 200.0,
-        width: 200.0,
-        child: CustomPaint(
-          foregroundPainter: ProgressBar(
-              completeColor: fillColor,
-              lineColor: Colors.blueGrey,
-              completePercent: percentage,
-              width: width),
-          child: Center(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      displayText,
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ),
-                  Text(
-                    displaySubText,
-                    style: TextStyle(fontSize: 16.0),
-                  ),Padding(
-          padding:
-              EdgeInsets.only(top: 10.0, bottom: 25.0, left: 15.0, right: 15.0),
-          child: Builder(
-              builder: (context) => RaisedButton(
+        child: Container(
+          height: 200.0,
+          width: 200.0,
+          child: CustomPaint(
+            foregroundPainter: ProgressBar(
+                completeColor: fillColor,
+                lineColor: Colors.blueGrey,
+                completePercent: percentage,
+                width: width),
+            child: Center(
+                child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Continue",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                        fontSize: 25.0),
+                    displayText,
+                    style: TextStyle(fontSize: 20.0),
                   ),
-                  elevation: 2.0,
-                  color: Colors.black,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  onPressed: () {
-                    debugPrint("Proceed clicked");
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                      Navigator.of(context).pushNamed("/");
-                  }))),
-                ],
-                mainAxisAlignment: MainAxisAlignment.center,
-              )),
+                ),
+                Text(
+                  displaySubText,
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(
+                        top: 10.0, bottom: 25.0, left: 15.0, right: 15.0),
+                    child: Builder(
+                        builder: (context) => RaisedButton(
+                            child: Text(
+                              "Continue",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white,
+                                  fontSize: 25.0),
+                            ),
+                            elevation: 2.0,
+                            color: Colors.black,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            onPressed: () {
+                              debugPrint("Proceed clicked");
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.of(context).pushNamed("/");
+                            }))),
+              ],
+              mainAxisAlignment: MainAxisAlignment.center,
+            )),
+          ),
         ),
       ),
-    ),
     );
   }
 }
 
 //***********************************************************************
-
-
-
-
 
 //Implemented using the canvas and the CustomPainter class
 
