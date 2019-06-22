@@ -17,7 +17,7 @@ class HomeScreenState extends State<HomeScreen> {
   String selectedEducation = '';
   String name = '';
   String address = '';
-  int phoneNo;
+  String phoneNo;
   String doctorsName = 'GMC Manjeri';
 
   var religions = [
@@ -133,7 +133,7 @@ class HomeScreenState extends State<HomeScreen> {
           keyboardType: TextInputType.number,
           style: textStyle,
           onChanged: (value) {
-            this.phoneNo = int.parse(value);
+            this.phoneNo = value;
             debugPrint('Something changed in the Name Text Field');
           },
           decoration: InputDecoration(

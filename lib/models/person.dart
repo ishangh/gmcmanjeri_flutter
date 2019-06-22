@@ -3,7 +3,7 @@ class Person
   int id = 0;
   String name = "";
   String address = "";
-  int phoneno = 0;
+  String phoneno = "";
   String religion = "";
   String occupation = "";
   String education = "";
@@ -12,6 +12,7 @@ class Person
   bool smoker = false;
   int age = 0;
   int sbp = 0;
+  int dbp = 0;
   int cholestrol = 0;
 
   bool isAHTT = false;
