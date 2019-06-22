@@ -31,20 +31,25 @@ class HomeScreenState extends State<HomeScreen> {
   ];
 
   var occupations = [
-    "Government",
-    "Private",
-    "Agriculture/Farming",
-    "Self Employed",
-    "Manual Labour",
-    "Others"
+    "Legislators, Managers, Senior Officials",
+    "Professionals",
+    "Technicians and Associate Professionals",
+    "Clerks",
+    "Skilled Workers & Shop + Market Sales Workers",
+    "Skilled Agriculture + Fishery Workers",
+    "Craft + Related Trade Workers",
+    "Plant + Machine Operators and Assemblers",
+    "Elementary Occupation",
+    "Unemployed"
   ];
 
   var educationCategories = [
-    "< Class 10",
-    "Class 10",
-    "Class 12",
+    "Profession / Honors",
     "Graduate",
-    "Post-Graduate",
+    "Intermediate / Diploma",
+    "High School Certificate",
+    "Primary School Certificate",
+    "Illiterate"
   ];
 
   TextEditingController nameController = new TextEditingController();
@@ -199,7 +204,7 @@ class HomeScreenState extends State<HomeScreen> {
           child: Builder(
               builder: (context) => RaisedButton(
                     child: Text(
-                      "Enter Medical Details",
+                      "ENTER MEDICAL DETAILS",
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.white,
@@ -217,7 +222,8 @@ class HomeScreenState extends State<HomeScreen> {
                           (nameController.text.isNotEmpty) &&
                           (addressController.text.isNotEmpty) &&
                           (phoneController.text.isNotEmpty)) {
-                        Person person = new Person(
+                        if(phoneController.text.length == 10 || ((phoneController.text.length == 12 || phoneController.text.length == 13) && phoneController.text[0] == '+')){
+                          Person person = new Person(
                             id,
                             name,
                             address,
@@ -230,8 +236,12 @@ class HomeScreenState extends State<HomeScreen> {
                           MaterialPageRoute(
                               builder: (context) => MedicalDetails(
                                     person: person,
-                                  )),
-                        );
+                                    )
+                                    ),
+                                  );
+                        } else {
+                          Scaffold.of(context).showSnackBar(SnackBar(content: Text("Invalid Phone Number")));
+                        }
                       } else {
                         Scaffold.of(context).showSnackBar(SnackBar(
                             content:

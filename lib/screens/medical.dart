@@ -328,13 +328,26 @@ class MedicalDetailsState extends State<MedicalDetails> {
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.white,
-                        fontSize: 25.0),
+                        fontSize: 25.0
+                      ),
                   ),
                   elevation: 2.0,
                   color: Colors.black,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                   onPressed: () {
+                    // ADDED MY CODE HERE
+                    if(double.tryParse(heightController.text) != double.nan){
+                      Scaffold.of(context).showSnackBar(SnackBar(content: Text("Height not a number."),));
+                    }
+                    else{
+                      if(double.tryParse(weightController.text) != double.nan){
+                        Scaffold.of(context).showSnackBar(SnackBar(content: Text("Weight not a number."),));
+                      }
+                      else{
+                        debugPrint("Do something over here");
+                      }
+                    }
                     debugPrint("Proceed clicked");
                     Navigator.push(
                       context,
