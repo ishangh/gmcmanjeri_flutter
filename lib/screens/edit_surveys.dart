@@ -21,23 +21,23 @@ class EditSurveyState extends State<EditSurvey> {
   void initState() {
     deleteButton = Colors.grey;
     personList.add(new Person(
-        1, "Asd", "asdm", 9442123423, "dfs", "student", "logic"));
+        1, "Asd", "asdm", "9442123423", "dfs", "student", "logic"));
     personList.add(new Person(
-        2, "Sdf", "Trm", 9442123423, "hxc", "student", "logic"));
+        2, "Sdf", "Trm", "9442123423", "hxc", "student", "logic"));
     personList.add(new Person(
-        3, "Dsw", "Tsdm", 9442123423, "we", "student", "logic"));
+        3, "Dsw", "Tsdm", "9442123423", "we", "student", "logic"));
     personList.add(new Person(
-        4, "Gds", "Tdrasfm", 9442123423, "as", "student", "logic"));
+        4, "Gds", "Tdrasfm", "9442123423", "as", "student", "logic"));
     personList.add(new Person(
-        5, "Asdds", "Tam", 9442123423, "fd", "student", "logic"));
+        5, "Asdds", "Tam", "9442123423", "fd", "student", "logic"));
     personList.add(new Person(
-        6, "Sfer", "Trsdf", 9442123423, "we", "student", "logic"));
+        6, "Sfer", "Trsdf", "9442123423", "we", "student", "logic"));
     personList.add(new Person(
-        7, "Qwds", "asd", 9442123423, "du", "student", "logic"));
+        7, "Qwds", "asd", "9442123423", "du", "student", "logic"));
     personList.add(new Person(
-        8, "Hae", "asf", 9442123423, "hf", "student", "logic"));
+        8, "Hae", "asf", "9442123423", "hf", "student", "logic"));
     personList.add(new Person(
-        9, "Lia", "SADf", 9442123423, "as", "student", "logic"));
+        9, "Lia", "SADf", "9442123423", "as", "student", "logic"));
   }
 
   @override
