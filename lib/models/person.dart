@@ -42,4 +42,15 @@ class Person
   //   this.waistCirc = wstC;
   //   this.hipCirc = hipC;
   // }
+
+  void updateDetailsofFirstPage(int id, String name, String address, String phoneno, String religion, String occupation, String education)
+  {
+    this.id = id;
+    this.name = name;
+    this.address = address;
+    this.phoneno = phoneno;
+    this.religion = religion;
+    this.occupation = occupation;
+    this.education = education;
+  }
 }

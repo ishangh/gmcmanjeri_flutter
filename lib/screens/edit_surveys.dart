@@ -20,24 +20,24 @@ class EditSurveyState extends State<EditSurvey> {
   @override
   void initState() {
     deleteButton = Colors.grey;
-    // personList.add(new Person(
-    //     1, "Asd", "asdm", "9442123423", "dfs", "student", "logic"));
-    // personList.add(new Person(
-    //     2, "Sdf", "Trm", "9442123423", "hxc", "student", "logic"));
-    // personList.add(new Person(
-    //     3, "Dsw", "Tsdm", "9442123423", "we", "student", "logic"));
-    // personList.add(new Person(
-    //     4, "Gds", "Tdrasfm", "9442123423", "as", "student", "logic"));
-    // personList.add(new Person(
-    //     5, "Asdds", "Tam", "9442123423", "fd", "student", "logic"));
-    // personList.add(new Person(
-    //     6, "Sfer", "Trsdf", "9442123423", "we", "student", "logic"));
-    // personList.add(new Person(
-    //     7, "Qwds", "asd", "9442123423", "du", "student", "logic"));
-    // personList.add(new Person(
-    //     8, "Hae", "asf", "9442123423", "hf", "student", "logic"));
-    // personList.add(new Person(
-    //     9, "Lia", "SADf", "9442123423", "as", "student", "logic"));
+    personList.add(new Person());
+    personList[0].updateDetailsofFirstPage(1, "Asd", "asdm", "9442123423", "dfs", "student", "logic");
+    personList.add(new Person());
+    personList[1].updateDetailsofFirstPage(2, "Sdf", "Trm", "9442123423", "hxc", "student", "logic");
+    personList.add(new Person());
+    personList[2].updateDetailsofFirstPage(3, "Dsw", "Tsdm", "9442123423", "we", "student", "logic");
+    personList.add(new Person());
+    personList[3].updateDetailsofFirstPage(4, "Gds", "Tdrasfm", "9442123423", "as", "student", "logic");
+    personList.add(new Person());
+    personList[4].updateDetailsofFirstPage(5, "Asdds", "Tam", "9442123423", "fd", "student", "logic");
+    personList.add(new Person());
+    personList[5].updateDetailsofFirstPage(6, "Sfer", "Trsdf", "9442123423", "we", "student", "logic");
+    personList.add(new Person());
+    personList[6].updateDetailsofFirstPage(7, "Qwds", "asd", "9442123423", "du", "student", "logic");
+    personList.add(new Person());
+    personList[7].updateDetailsofFirstPage(8, "Hae", "asf", "9442123423", "hf", "student", "logic");
+    personList.add(new Person());
+    personList[8].updateDetailsofFirstPage(9, "Lia", "SADf", "9442123423", "as", "student", "logic");
   }
 
   @override
