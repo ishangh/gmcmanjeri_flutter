@@ -11,13 +11,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  int id;
-  String selectedReligion = '';
-  String selectedOccupation = '';
-  String selectedEducation = '';
-  String name = '';
-  String address = '';
-  String phoneNo;
+
+  Person person = new Person();
+  // int id;
+  // String selectedReligion = '';
+  // String selectedOccupation = '';
+  // String selectedEducation = '';
+  // String name = '';
+  // String address = '';
+  // String phoneNo;
   String doctorsName = 'GMC Manjeri';
 
   var religions = [
@@ -111,9 +113,9 @@ class HomeScreenState extends State<HomeScreen> {
           style: textStyle,
           onChanged: (value) {
             if (s == 'Name')
-              this.name = value;
+              this.person.name = value;
             else
-              this.address = value;
+              this.person.address = value;
             debugPrint('Something changed in the Name Text Field');
           },
           decoration: InputDecoration(
@@ -133,7 +135,7 @@ class HomeScreenState extends State<HomeScreen> {
           keyboardType: TextInputType.number,
           style: textStyle,
           onChanged: (value) {
-            this.phoneNo = value;
+            this.person.phoneno = value;
             debugPrint('Something changed in the Name Text Field');
           },
           decoration: InputDecoration(
@@ -180,13 +182,13 @@ class HomeScreenState extends State<HomeScreen> {
                               onSelected: (bool isChecked) {
                                 setState(() {
                                   if (s == 'Select Religion')
-                                    this.selectedReligion =
+                                    this.person.religion =
                                         isChecked ? choice : "";
                                   else if (s == 'Select Education')
-                                    this.selectedEducation =
+                                    this.person.education =
                                         isChecked ? choice : "";
                                   else if (s == 'Select Occupation')
-                                    this.selectedOccupation =
+                                    this.person.occupation =
                                         isChecked ? choice : "";
                                 });
                               },
@@ -204,7 +206,7 @@ class HomeScreenState extends State<HomeScreen> {
           child: Builder(
               builder: (context) => RaisedButton(
                     child: Text(
-                      "ENTER MEDICAL DETAILS",
+                      "Enter Medical Details",
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.white,
@@ -216,22 +218,14 @@ class HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(10)),
                     onPressed: () {
                       debugPrint("Proceed clicked");
-                      if ((selectedEducation.isNotEmpty) &&
-                          (selectedReligion.isNotEmpty) &&
-                          (selectedOccupation.isNotEmpty) &&
+                      if ((this.person.education.isNotEmpty) &&
+                          (this.person.religion.isNotEmpty) &&
+                          (this.person.occupation.isNotEmpty) &&
                           (nameController.text.isNotEmpty) &&
                           (addressController.text.isNotEmpty) &&
                           (phoneController.text.isNotEmpty)) {
                         if(phoneController.text.length == 10 || ((phoneController.text.length == 12 || phoneController.text.length == 13) && phoneController.text[0] == '+')){
-                          Person person = new Person(
-                            id,
-                            name,
-                            address,
-                            phoneNo,
-                            selectedReligion,
-                            selectedOccupation,
-                            selectedEducation);
-                        Navigator.push(
+                          Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => MedicalDetails(
@@ -255,10 +249,10 @@ class HomeScreenState extends State<HomeScreen> {
       getTextItem('Name', 1, nameController),
       getTextItem('Address', 5, addressController),
       getNumberItem('Phone no', phoneController),
-      getChoiceItem('Select Religion', religions, this.selectedReligion),
+      getChoiceItem('Select Religion', religions, this.person.religion),
       getChoiceItem(
-          'Select Education', educationCategories, this.selectedEducation),
-      getChoiceItem('Select Occupation', occupations, this.selectedOccupation),
+          'Select Education', educationCategories, this.person.education),
+      getChoiceItem('Select Occupation', occupations, this.person.occupation),
       proceedButton(),
     ];
 

@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:gmcmanjeri_flutter/models/person.dart';
 
 // For deciding the type of Result to be displayed, change the value passed into the ResultContent Widget, in the layout of HOME section
 
@@ -26,105 +27,69 @@ var resultsList = new List<Result>();
 // Change the value of this variable to change the width of the progress bar
 double width = 10.0;
 
-//*******************MAIN FUNCTION*****************************************
+// class Home extends StatelessWidget {
+//   //BASIC LAYOUT
+//   // Scaffold
+//   //      Home Content
+//   //      Save and Delete Buttons
 
-void main() {
-  //THIS IS WHERE YOU CAN ADD CATEGORIES OR CHANGE THEIR PROPERTIES
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("RESULTS"),
+//       ),
+//       body: ResultContent(3),
 
-  resultsList.add(new Result(20.0, Colors.green, "LOW RISK", "(<10%)"));
-  resultsList.add(
-      new Result(40.0, Colors.amberAccent, "LOW MEDIUM RISK", "(10%-20%)"));
-  resultsList.add(new Result(60.0, Colors.amber, "MEDIUM RISK", "(20%-30)"));
-  resultsList.add(new Result(80.0, Colors.redAccent, "HIGH RISK", "(30%-40%)"));
-  resultsList.add(new Result(100.0, Colors.red, "CRITICAL RISK", "(>40%)"));
+//       //********************* IMPORTANT ***********************************
 
-  runApp(MyApp());
-}
-//***************************************************************************
+//       //CHANGE THE VARIABLE PASSED INTO ResultContent (given right above) TO DECIDE THE TYPE OF RESULT
+//       // 0 - LOW RISK
+//       // 1 - LOW MEDIUM RISK
+//       // 2 - MEDIUM RISK
+//       // 3 - HIGH RISK
+//       // 4 - CRITICAL RISK
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'GMC Manjeri Survey',
-      color: Colors.white,
-      theme: ThemeData(
-          primaryColor: Colors.black,
-          appBarTheme:
-              AppBarTheme(iconTheme: IconThemeData(color: Colors.black)),
-          inputDecorationTheme: InputDecorationTheme(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-          iconTheme: IconThemeData(color: Colors.black)),
-      home: Home(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
+//       //********************************************************************
 
-//*********************************** HOME ******************************************
+//       floatingActionButton: Row(
+//         children: <Widget>[
+//           Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: FloatingActionButton.extended(
+//               onPressed: () {},
+//               label: const Text("Save"),
+//               elevation: 10.0,
+//               backgroundColor: Colors.black,
+//               foregroundColor: Colors.white,
+//             ),
+//           ),
+//           FloatingActionButton.extended(
+//             onPressed: () {},
+//             label: const Text("Delete"),
+//             elevation: 10.0,
+//             backgroundColor: Colors.black,
+//             foregroundColor: Colors.white,
+//           ),
+//         ],
+//         mainAxisAlignment: MainAxisAlignment.center,
+//       ),
+//       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+//     );
+//   }
+// }
 
-class Home extends StatelessWidget {
-  //BASIC LAYOUT
-  // Scaffold
-  //      Home Content
-  //      Save and Delete Buttons
+// //**********************************************************************************
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("RESULTS"),
-      ),
-      body: ResultContent(3),
-
-      //********************* IMPORTANT ***********************************
-
-      //CHANGE THE VARIABLE PASSED INTO ResultContent (given right above) TO DECIDE THE TYPE OF RESULT
-      // 0 - LOW RISK
-      // 1 - LOW MEDIUM RISK
-      // 2 - MEDIUM RISK
-      // 3 - HIGH RISK
-      // 4 - CRITICAL RISK
-
-      //********************************************************************
-
-      floatingActionButton: Row(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FloatingActionButton.extended(
-              onPressed: () {},
-              label: const Text("Save"),
-              elevation: 10.0,
-              backgroundColor: Colors.black,
-              foregroundColor: Colors.white,
-            ),
-          ),
-          FloatingActionButton.extended(
-            onPressed: () {},
-            label: const Text("Delete"),
-            elevation: 10.0,
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
-          ),
-        ],
-        mainAxisAlignment: MainAxisAlignment.center,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
-  }
-}
-
-//**********************************************************************************
-
-//*************************************RESULT CONTENT******************************************
+// //*************************************RESULT CONTENT******************************************
 
 class ResultContent extends StatefulWidget {
   int choice;
+  Person person;
 
-  ResultContent(var choice) {
+  ResultContent(var choice, Person person) {
     this.choice = choice;
+    this.person = person;
     resultsList.add(new Result(20.0, Colors.green, "LOW RISK", "(<10%)"));
     resultsList.add(
         new Result(40.0, Colors.amberAccent, "LOW MEDIUM RISK", "(10%-20%)"));

@@ -17,16 +17,16 @@ class MedicalDetails extends StatefulWidget {
 class MedicalDetailsState extends State<MedicalDetails> {
   Person person;
   var commonPadding = EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15);
-  var genderToggle = true;
-  var antihypertensive = true;
-  int height = 0;
-  int weight = 0;
-  double bmi = 0;
-  var menopause = false;
-  var premenopause = false;
-  var preCAD = false;
-  int waist = 0;
-  int hip = 0;
+  // var genderToggle = true;
+  // var antihypertensive = true;
+  // int height = 0;
+  // int weight = 0;
+  // double bmi = 0;
+  // var menopause = false;
+  // var premenopause = false;
+  // var preCAD = false;
+  // int waist = 0;
+  // int hip = 0;
   TextEditingController ageController = new TextEditingController();
   TextEditingController hyperController = new TextEditingController();
   TextEditingController bpController = new TextEditingController();
@@ -64,10 +64,10 @@ class MedicalDetailsState extends State<MedicalDetails> {
             if (s == "Age: ") this.person.age = int.parse(value);
             if (s == "Blood Pressure: ")
               this.person.sbp = int.parse(value.split("/")[0]);
-            if (s == "Height (cms): ") this.height = int.parse(value);
-            if (s == "Weight (kg): ") this.weight = int.parse(value);
-            if (s == "Waist circumference: ") this.waist = int.parse(value);
-            if (s == "Hip circumference: ") this.hip = int.parse(value);
+            if (s == "Height (cms): ") this.person.height = int.parse(value);
+            if (s == "Weight (kg): ") this.person.weight = int.parse(value);
+            if (s == "Waist circumference: ") this.person.waistCirc = int.parse(value);
+            if (s == "Hip circumference: ") this.person.hipCirc = int.parse(value);
             debugPrint('Something changed in the Text Field');
           },
           decoration: InputDecoration(
@@ -181,18 +181,18 @@ class MedicalDetailsState extends State<MedicalDetails> {
           onTap: () {
             setState(() {
               if (s == 'Menopause: ') {
-                this.menopause = !this.menopause;
-                if (this.menopause == false) this.premenopause = false;
+                this.person.isMenopause = !this.person.isMenopause;
+                if (this.person.isMenopause == false) this.person.isPrematureMenopause = false;
               }
               if (s == 'Premature menopause? less than 40 years: ')
-                this.premenopause = !this.premenopause;
+                this.person.isPrematureMenopause = !this.person.isPrematureMenopause;
               if (s == 'Are you already on Antihypertensive therapy? :')
-                this.antihypertensive = !this.antihypertensive;
+                this.person.isAHTT = !this.person.isAHTT;
               if (s == 'Diabetes: ')
                 this.person.diabetes = !this.person.diabetes;
               if (s == 'Smoker: ') this.person.smoker = !this.person.smoker;
               if (s == 'Family history of premature CAD (M < 55Y, F < 65Y): ')
-                this.preCAD = !this.preCAD;
+                this.person.famHistoryOfCADRel = !this.person.famHistoryOfCADRel;
             });
           },
         );
@@ -244,7 +244,7 @@ class MedicalDetailsState extends State<MedicalDetails> {
 
     Padding getMenopause() {
       if (this.person.gender == 1) {
-        return toggleButtons("Menopause: ", "Y", "N", this.menopause,
+        return toggleButtons("Menopause: ", "Y", "N", this.person.isMenopause,
             Colors.greenAccent, Colors.redAccent);
       } else {
         return Padding(
@@ -255,9 +255,9 @@ class MedicalDetailsState extends State<MedicalDetails> {
     }
 
     Padding getMenopauseYear() {
-      if (this.menopause == true) {
+      if (this.person.isMenopause == true) {
         return toggleButtons("Premature menopause? less than 40 years: ", "Y",
-            "N", this.premenopause, Colors.greenAccent, Colors.redAccent);
+            "N", this.person.isPrematureMenopause, Colors.greenAccent, Colors.redAccent);
       } else {
         return Padding(
           padding: EdgeInsets.all(0.0),
@@ -292,8 +292,8 @@ class MedicalDetailsState extends State<MedicalDetails> {
         return Padding(
           padding: commonPadding,
           child: Text(
-            "BMI: ${(this.weight / this.height / this.height * 10000).toStringAsFixed(2)} " +
-                checkBMI((this.weight / this.height / this.height * 10000)),
+            "BMI: ${(this.person.weight / this.person.height / this.person.height * 10000).toStringAsFixed(2)} " +
+                checkBMI((this.person.weight / this.person.height / this.person.height * 10000)),
             style: commonStyle,
           ),
         );
@@ -301,8 +301,8 @@ class MedicalDetailsState extends State<MedicalDetails> {
         return Padding(
           padding: commonPadding,
           child: Text(
-            "Waist hip Ratio: ${(this.waist / this.hip).toStringAsFixed(2)} " +
-                checkWH(this.waist / this.hip),
+            "Waist hip Ratio: ${(this.person.waistCirc / this.person.hipCirc).toStringAsFixed(2)} " +
+                checkWH(this.person.waistCirc / this.person.hipCirc),
             style: commonStyle,
           ),
         );
@@ -310,7 +310,7 @@ class MedicalDetailsState extends State<MedicalDetails> {
         return Padding(
           padding: commonPadding,
           child: Text(
-            "Waist height Ratio: ${(this.waist / this.hip).toStringAsPrecision(2)} ",
+            "Waist height Ratio: ${(this.person.waistCirc / this.person.hipCirc).toStringAsPrecision(2)} ",
             style: commonStyle,
           ),
         );
@@ -352,7 +352,8 @@ class MedicalDetailsState extends State<MedicalDetails> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ResultContent(3)),
+                          builder: (context) => ResultContent(3, this.person)),
+
                     );
                   })));
     }
@@ -385,13 +386,13 @@ class MedicalDetailsState extends State<MedicalDetails> {
           )),
       getTextWidget("Cholesterol (mg/dL): ", cholesterolController),
       toggleButtons("Are you already on Antihypertensive therapy? :", "Y", "N",
-          this.antihypertensive, Colors.greenAccent, Colors.redAccent),
+          this.person.isAHTT, Colors.greenAccent, Colors.redAccent),
       toggleAddnQues(
-          "For how many years?: ", this.antihypertensive, hyperController),
+          "For how many years?: ", this.person.isAHTT, hyperController),
       getMenopause(),
       getMenopauseYear(),
       toggleButtons("Family history of premature CAD (M < 55Y, F < 65Y): ", "Y",
-          "N", this.preCAD, Colors.greenAccent, Colors.redAccent),
+          "N", this.person.famHistoryOfCADRel, Colors.greenAccent, Colors.redAccent),
       getTextWidget("Height (cms): ", heightController),
       getTextWidget("Weight (kg): ", weightController),
       printCalc("BMI"),

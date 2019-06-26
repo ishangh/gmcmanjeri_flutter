@@ -26,7 +26,6 @@ class GMCManjeri extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           EditSurvey.routeName: (BuildContext context) => new EditSurvey(),
           Export.routeName: (BuildContext context) => new Export(),
-          Statistics.routeName: (BuildContext context) => new Statistics(),
-        });
+      });
   }
 }

@@ -16,30 +16,30 @@ class Person
   int cholestrol = 0;
 
   bool isAHTT = false;
-  double ahttMonths = 0.0;
+  int ahttMonths = 0;
 
   bool isMenopause = false;
   bool isPrematureMenopause = false;
   bool famHistoryOfCADRel = false;
 
-  double height = 0.0;
-  double weight = 0.0;
-  double bmi = 0.0;
+  int height = 0;
+  int weight = 0;
+  // double bmi = 0.0;
   
-  double waistCirc = 0.0;
-  double hipCirc = 0.0;
+  int waistCirc = 0;
+  int hipCirc = 0;
 
-  String color = 'green';
+  //String color = 'green';
 
-  Person(this.id, this.name, this.address, this.phoneno, this.religion, this.occupation, this.education);
-  void updateValues( { bool isM = false, bool isPM = false, bool fhCADRel = false, double ht = 0.0, double wt = 0.0, double bmi = 0.0, double wstC = 0.0, double hipC = 0.0 } ){
-    this.isMenopause = isM;
-    this.isPrematureMenopause = isPM;
-    this.famHistoryOfCADRel = fhCADRel;
-    this.height = ht;
-    this.weight = wt;
-    this.bmi = bmi;
-    this.waistCirc = wstC;
-    this.hipCirc = hipC;
-  }
+  // Person(this.id, this.name, this.address, this.phoneno, this.religion, this.occupation, this.education);
+  // void updateValues( { bool isM = false, bool isPM = false, bool fhCADRel = false, double ht = 0.0, double wt = 0.0, double bmi = 0.0, double wstC = 0.0, double hipC = 0.0 } ){
+  //   this.isMenopause = isM;
+  //   this.isPrematureMenopause = isPM;
+  //   this.famHistoryOfCADRel = fhCADRel;
+  //   this.height = ht;
+  //   this.weight = wt;
+  //   this.bmi = bmi;
+  //   this.waistCirc = wstC;
+  //   this.hipCirc = hipC;
+  // }
 }
