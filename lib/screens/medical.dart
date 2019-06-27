@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gmcmanjeri_flutter/models/calculaterisk.dart';
 import 'package:gmcmanjeri_flutter/models/person.dart';
 import 'package:gmcmanjeri_flutter/screens/result.dart';
 
@@ -62,8 +63,12 @@ class MedicalDetailsState extends State<MedicalDetails> {
           style: commonStyle,
           onChanged: (value) {
             if (s == "Age: ") this.person.age = int.parse(value);
-            if (s == "Blood Pressure: ")
-              this.person.sbp = int.parse(value.split("/")[0]);
+            if (s == "SBP")
+              this.person.sbp = int.parse(value);
+            if(s == "DBP")
+              this.person.dbp = int.parse(value);
+            if(s == "Cholesterol (mg/dL): ")
+              this.person.cholestrol = int.parse(value);
             if (s == "Height (cms): ") this.person.height = int.parse(value);
             if (s == "Weight (kg): ") this.person.weight = int.parse(value);
             if (s == "Waist circumference: ") this.person.waistCirc = int.parse(value);
@@ -337,24 +342,21 @@ class MedicalDetailsState extends State<MedicalDetails> {
                       borderRadius: BorderRadius.circular(10)),
                   onPressed: () {
                     // ADDED MY CODE HERE
-                    if(double.tryParse(heightController.text) != double.nan){
+                    if(double.tryParse(heightController.text) == double.nan){
                       Scaffold.of(context).showSnackBar(SnackBar(content: Text("Height not a number."),));
                     }
-                    else{
-                      if(double.tryParse(weightController.text) != double.nan){
+                    else if(double.tryParse(weightController.text) == double.nan){
                         Scaffold.of(context).showSnackBar(SnackBar(content: Text("Weight not a number."),));
                       }
-                      else{
-                        debugPrint("Do something over here");
-                      }
-                    }
+                    else{
                     debugPrint("Proceed clicked");
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ResultContent(3, this.person)),
-
+                          builder: (context) => ResultContent(this.person.cholestrol == 0 ? ResultPredict(this.person).returnEle2() : ResultPredict(this.person).returnEle(), this.person)),
+                
                     );
+                    }
                   })));
     }
 
