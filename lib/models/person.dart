@@ -1,3 +1,4 @@
+import 'package:gmcmanjeri_flutter/models/persondatabase.dart';
 class Person
 {
   int id = 0;
@@ -43,6 +44,8 @@ class Person
   //   this.hipCirc = hipC;
   // }
 
+  Person();
+
   void updateDetailsofFirstPage(int id, String name, String address, String phoneno, String religion, String occupation, String education)
   {
     this.id = id;
@@ -52,5 +55,32 @@ class Person
     this.religion = religion;
     this.occupation = occupation;
     this.education = education;
+  }
+  // Convert from JSON
+  Person.fromJson(Map<String, dynamic> json){
+    this.id = json[PersonDatabase.id];
+    this.name = json[PersonDatabase.name];
+    this.address = json[PersonDatabase.address];
+    this.phoneno = json[PersonDatabase.phoneno];
+    this.religion = json[PersonDatabase.religion];
+    this.occupation = json[PersonDatabase.occupation];
+    this.education = json[PersonDatabase.education];
+    this.diabetes = json[PersonDatabase.diabetes];
+    this.gender = json[PersonDatabase.gender];
+    this.smoker = json[PersonDatabase.smoker];
+    this.age = json[PersonDatabase.age];
+    this.sbp = json[PersonDatabase.sbp];
+    this.dbp = json[PersonDatabase.dbp];
+    this.cholestrol = json[PersonDatabase.cholesterol];
+    this.isAHTT = json[PersonDatabase.isAhtt];
+    this.ahttMonths = json[PersonDatabase.ahttmonths];
+    this.isMenopause = json[PersonDatabase.isMenopause];
+    this.isPrematureMenopause = json[PersonDatabase.isPrematureMenopause];
+    this.famHistoryOfCADRel = json[PersonDatabase.famHistoryOfCADRel];
+    this.height = json[PersonDatabase.height];
+    this.weight = json[PersonDatabase.weight];
+    // this.bmi = json[PersonDatabase.bmi];
+    this.waistCirc = json[PersonDatabase.waistCirc];
+    this.hipCirc = json[PersonDatabase.hipCirc];
   }
 }
