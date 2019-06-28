@@ -12,6 +12,9 @@ class ResultPredict {
   ResultPredict(this.person);
 
   int returnEle() {
+
+    if(person.age <40 || person.age >70 )
+      return 0;
     int position = 0;
     if (person.diabetes == false) position += 320;
     if (person.gender == 1) position += 160;
@@ -32,6 +35,8 @@ class ResultPredict {
 
   int returnEle2() {
     int position = 0;
+    if(person.age <40 || person.age >70 )
+      return 0;
 
     if (!person.diabetes) position += 64;
     debugPrint("1: " + position.toString());
