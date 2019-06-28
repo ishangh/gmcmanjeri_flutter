@@ -46,7 +46,7 @@ class PersonDatabase {
     }
   }
   
-  Future<void> createTodoTable(Database db) async {
+  Future<void> createPersonTable(Database db) async {
     final personSql = '''CREATE TABLE $PersonTable
     (
       $id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -97,7 +97,7 @@ class PersonDatabase {
   }
 
   Future<void> onCreate(Database db, int version) async {
-    // await createPersonTable(db);
+    await createPersonTable(db);
     return null;
   }
 }
