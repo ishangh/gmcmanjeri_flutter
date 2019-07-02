@@ -2,7 +2,10 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix0;
 import 'package:gmcmanjeri_flutter/models/person.dart';
+import 'package:gmcmanjeri_flutter/utils/personhelper.dart';
+
 
 // For deciding the type of Result to be displayed, change the value passed into the ResultContent Widget, in the layout of HOME section
 
@@ -101,23 +104,25 @@ class ResultContent extends StatefulWidget {
 
   @override
   _ResultContentState createState() {
-    return _ResultContentState(choice);
+    return _ResultContentState(choice, person);
   }
 }
 
 class _ResultContentState extends State<ResultContent>
     with TickerProviderStateMixin {
+    Person person;
   double tempPercentage = 0.0;
   double newPercentage = 0.0;
   double percentage = 0.0;
   int choice;
   String displayText;
   String displaySubText;
+  PersonHelper helper = PersonHelper();
 
   Color fillColor;
   AnimationController percentageAnimationController;
 
-  _ResultContentState(this.choice);
+  _ResultContentState(this.choice, this.person);
 
   @override
   void initState() {
@@ -221,8 +226,21 @@ class _ResultContentState extends State<ResultContent>
                               color: Colors.black,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
-                              onPressed: () {
+                              onPressed: () async {
+                                
+                                debugPrint(this.person.id.toString());
                                 debugPrint("Save clicked");
+
+                                int result;
+                                result = await helper. insertPerson(person);
+
+                                		if (result != 0) {
+			_showAlertDialog('Status', 'Note Deleted Successfully');
+		} else {
+			_showAlertDialog('Status', 'Error Occured while Deleting Note');
+}
+
+                                Navigator.pop(context);
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                                 Navigator.pop(context);
@@ -247,6 +265,7 @@ class _ResultContentState extends State<ResultContent>
                               Navigator.pop(context);
                               Navigator.pop(context);
                               Navigator.pop(context);
+                              Navigator.pop(context);
                               Navigator.of(context).pushNamed("/");
                             })),
                   ],
@@ -257,6 +276,18 @@ class _ResultContentState extends State<ResultContent>
 
     );
   }
+
+  void _showAlertDialog(String title, String message) {
+
+		AlertDialog alertDialog = AlertDialog(
+			title: Text(title),
+			content: Text(message),
+		);
+		showDialog(
+				context: context,
+				builder: (_) => alertDialog
+		);
+}
 }
 
 //***********************************************************************
