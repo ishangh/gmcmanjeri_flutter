@@ -4,8 +4,8 @@ import 'package:simple_permissions/simple_permissions.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:gmcmanjeri_flutter/models/person.dart';
 import 'dart:io';
-
-List<Person> personList = new List<Person>();
+import 'package:gmcmanjeri_flutter/utils/personhelper.dart';
+import 'package:sqflite/sqflite.dart';
 
 var file;
 
@@ -19,8 +19,14 @@ class Export extends StatefulWidget {
 }
 
 class ExportState extends State {
+  List<Person> personList;
+  PersonHelper personHelper = PersonHelper();
+
+
+
   static const String routeName = "/export";
-  bool checkPermission;
+  bool checkPermission = false;
+
 
   @override
   void initState() {
@@ -28,6 +34,7 @@ class ExportState extends State {
 
     //Obtain a list of Persons from the database and replace the below section
 
+/*
     personList.add(new Person());
     personList[0].updateDetailsofFirstPage(
         1, "Asd", "asdm", "9442123423", "dfs", "student", "logic");
@@ -55,12 +62,21 @@ class ExportState extends State {
     personList.add(new Person());
     personList[8].updateDetailsofFirstPage(
         9, "Lia", "SADf", "9442123423", "as", "student", "logic");
+*/
 
     getPermission();
   }
 
+
   @override
   Widget build(BuildContext context) {
+
+    if(personList == null)
+    {
+      personList = List<Person>();
+      updateListView();
+    }
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Export to SpreadSheet"),
@@ -120,7 +136,7 @@ class ExportState extends State {
     }
 
 
-    if (checkPermission) {
+    if (checkPermission && personList.length != 0) {
       var now = new DateTime.now();
       String filename = now.year.toString() +
           now.month.toString() +
@@ -156,12 +172,31 @@ class ExportState extends State {
 
 
     }
+    else if(personList.length == 0)
+      {
+        Scaffold.of(context).showSnackBar(
+            new SnackBar(content: Text("Nothing to export!")));
+      }
 
     else {
       debugPrint("permission not obtained");
       Scaffold.of(context).showSnackBar(
           new SnackBar(content: Text("Permission to store data not obtained")));
     }
+  }
+
+  void updateListView()
+  {
+    final Future<Database> dbFuture = personHelper.initializeDatabase();
+    dbFuture.then((database)
+    {
+      Future<List<Person>> personListFuture = personHelper.getPersonList();
+      personListFuture.then((personList) {
+        setState(() {
+          this.personList = personList;
+        });
+      });
+    });
   }
 
 
