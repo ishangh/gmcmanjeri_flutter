@@ -26,9 +26,9 @@ class PersonHelper
   static const sbp = 'sbp';
   static const dbp = 'dbp';
   static const cholesterol = 'cholesterol';
-  static const isAhtt = 'isahtt';
-  static const ahttmonths = 'ahttmonths';
-  static const isMenopause = 'ismenopause';
+  static const isAhtt = 'isAHTT';
+  static const ahttmonths = 'ahttMonths';
+  static const isMenopause = 'isMenopause';
   static const isPrematureMenopause = 'isPM';
   static const famHistoryOfCADRel = 'isRelCAD';
   static const height = 'height';

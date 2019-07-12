@@ -17,11 +17,17 @@ class ResultPredict {
       return 0;
     int position = 0;
     if (person.diabetes == false) position += 320;
+    debugPrint("1: " + position.toString());
     if (person.gender == 1) position += 160;
+    debugPrint("2: " + position.toString());
     if (person.smoker == true) position += 80;
+    debugPrint("3: " + position.toString());
     position += ((70 - (person.age - (person.age % 10))) * 2);
+    debugPrint("4: " + position.toString());
     position += ((180 - (person.sbp - (person.sbp % 20))) / 4).round();
+    debugPrint("5: " + position.toString());
     position += (person.cholestrol - 4);
+    debugPrint("6: " + position.toString());
     try {
       int position2 = position;
       debugPrint("position is;;" + position.toString());

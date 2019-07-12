@@ -229,6 +229,9 @@ class _ResultContentState extends State<ResultContent>
                               onPressed: () async {
                                 
                                 debugPrint(this.person.id.toString());
+                                debugPrint(this.person.isAHTT.toString());
+                                debugPrint(this.person.ahttMonths.toString());
+                                debugPrint(this.person.isMenopause.toString());
                                 debugPrint("Save clicked");
 
                                 int result;

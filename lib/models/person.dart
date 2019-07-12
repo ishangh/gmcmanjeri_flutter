@@ -146,6 +146,6 @@ class Person
     this.height = map['height'];
     this.weight = map['weight'];
     this.waistCirc = map['waist'];
-    this.hipCirc = map['waist'];
+    this.hipCirc = map['hip'];
   }
 }

@@ -68,7 +68,7 @@ class MedicalDetailsState extends State<MedicalDetails> {
             if(s == "DBP")
               this.person.dbp = int.parse(value);
             if(s == "Cholesterol (mg/dL): ")
-              this.person.cholestrol = int.parse(value);
+              this.person.cholestrol = (int.parse(value) / 38) as int;
             if (s == "Height (cms): ") this.person.height = int.parse(value);
             if (s == "Weight (kg): ") this.person.weight = int.parse(value);
             if (s == "Waist circumference: ") this.person.waistCirc = int.parse(value);
@@ -230,8 +230,8 @@ class MedicalDetailsState extends State<MedicalDetails> {
             keyboardType: TextInputType.number,
             style: commonStyle,
             onChanged: (value) {
-              this.person.age = int.parse(value);
-              debugPrint('Something changed in the Age Text Field');
+              this.person.ahttMonths = int.parse(value);
+              debugPrint('Something changed in the ahtt Text Field');
             },
             decoration: InputDecoration(
                 labelText: s,
@@ -315,7 +315,7 @@ class MedicalDetailsState extends State<MedicalDetails> {
         return Padding(
           padding: commonPadding,
           child: Text(
-            "Waist height Ratio: ${(this.person.waistCirc / this.person.hipCirc).toStringAsPrecision(2)} ",
+            "Waist height Ratio: ${(this.person.waistCirc / this.person.height).toStringAsPrecision(2)} ",
             style: commonStyle,
           ),
         );
@@ -375,7 +375,7 @@ class MedicalDetailsState extends State<MedicalDetails> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Text(
-                "Blood Pressure: ",
+                "BP : ",
                 style: commonStyle,
               ),
               Flexible(child: getTextWidget("SBP", sbpController)),
