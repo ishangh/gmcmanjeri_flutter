@@ -121,6 +121,24 @@ class ExportState extends State {
     headRow.add("Religion");
     headRow.add("Occupation");
     headRow.add("Education");
+    headRow.add("Diabetes");
+    headRow.add("Gender");
+    headRow.add("Smoker");
+    headRow.add("Age");
+    headRow.add("SBP");
+    headRow.add("DBP");
+    headRow.add("Cholestrol");
+    headRow.add("AHTT");
+    headRow.add("Months of AHTT");
+    headRow.add("Menopause");
+    headRow.add("Premature Menopause");
+    headRow.add("History of CAD");
+    headRow.add("Height");
+    headRow.add("Weight");
+    headRow.add("Waist Circumference");
+    headRow.add("Hip Circumference");
+
+
     rows.add(headRow);
 
     for (int i = 0; i < personList.length; i++) {
@@ -132,6 +150,35 @@ class ExportState extends State {
       row.add(personList[i].religion);
       row.add(personList[i].occupation);
       row.add(personList[i].education);
+      row.add(personList[i].diabetes);
+
+
+      switch(personList[i].gender)
+      {
+        case 0: row.add("Male");
+          break;
+        case 1: row.add("Female");
+        break;
+        case 2: row.add("Transgender");
+        break;
+      }
+
+      row.add(personList[i].smoker);
+      row.add(personList[i].age);
+      row.add(personList[i].sbp);
+      row.add(personList[i].dbp);
+      row.add(personList[i].cholestrol);
+      row.add(personList[i].isAHTT);
+      row.add(personList[i].ahttMonths);
+      row.add(personList[i].isMenopause);
+      row.add(personList[i].isPrematureMenopause);
+      row.add(personList[i].famHistoryOfCADRel);
+      row.add(personList[i].height);
+      row.add(personList[i].weight);
+      row.add(personList[i].waistCirc);
+      row.add(personList[i].hipCirc);
+
+
       rows.add(row);
     }
 
