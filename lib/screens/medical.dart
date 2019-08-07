@@ -67,7 +67,7 @@ class MedicalDetailsState extends State<MedicalDetails> {
               this.person.sbp = int.parse(value);
             if(s == "DBP")
               this.person.dbp = int.parse(value);
-            if(s == "Cholesterol (mg/dL): ")
+            if(s == "Cholesterol (mmol/L): ")
               this.person.cholestrol = (int.parse(value) / 38) as int;
             if (s == "Height (cms): ") this.person.height = int.parse(value);
             if (s == "Weight (kg): ") this.person.weight = int.parse(value);
@@ -386,7 +386,7 @@ class MedicalDetailsState extends State<MedicalDetails> {
               Flexible(child: getTextWidget("DBP", dbpController)),
             ],
           )),
-      getTextWidget("Cholesterol (mg/dL): ", cholesterolController),
+      getTextWidget("Cholesterol (mmol/L): ", cholesterolController),
       toggleButtons("Are you already on Antihypertensive therapy? :", "Y", "N",
           this.person.isAHTT, Colors.greenAccent, Colors.redAccent),
       toggleAddnQues(
